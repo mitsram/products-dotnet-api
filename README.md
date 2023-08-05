@@ -18,11 +18,11 @@ To run the API locally, follow these steps:
 
 1. Clone the repository:
 ```
-   git clone git@github.com:mitsram/items-dotnet-api.git
+   git clone git@github.com:mitsram/products-dotnet-api.git
 ```
 2. Navigate to the project directory:
 ```
-cd items-dotnet-api
+cd products-dotnet-api
 ```
 4. Set up the database:
 * Ensure you have a running instance of a compatible database (e.g., SQL Server, PostgreSQL).
