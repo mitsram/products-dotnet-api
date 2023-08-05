@@ -1,9 +1,0 @@
-@host=https://localhost:7155
-
-POST {{host}}/auth/login
-Content-Type: application/json
-
-{
-    "email": "mitchell@example.com",
-    "password": "securePassword"
-}

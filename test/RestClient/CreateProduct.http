@@ -1,0 +1,10 @@
+@host=https://localhost:7093
+
+POST {{host}}/products
+Content-Type: application/json
+
+{
+    "name": "Mouse",
+    "description": "MX Master 3",
+    "price": 189.50
+}
