@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Products.Application.Services.Product;
+using Products.Application.Services.Products;
 using Products.Contracts.Product;
 
 namespace Products.Api.Controllers;
@@ -25,10 +25,10 @@ public class ProductsController: ControllerBase
         );
 
         var response = new CreateProductResponse(
-            result.Id,
-            result.Name,
-            result.Description,
-            result.Price
+            result.Product.Id,
+            result.Product.Name,
+            result.Product.Description,
+            result.Product.Price
         );
         
         return Ok(response);

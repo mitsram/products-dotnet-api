@@ -1,5 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
-using Products.Application.Services.Product;
+using Products.Application.Services.Products;
 
 namespace Products.Application;
 
