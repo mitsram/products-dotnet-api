@@ -33,11 +33,11 @@ dotnet build
 ```
 6. Run database migrations:
 ```
-dotnet ef database update --project src/Items.Infrastructure
+dotnet ef database update --project src/Products.Infrastructure
 ```
 8. Launch the API:
 ```
-dotnet run --project src/Items.API
+dotnet run --project src/Products.API
 ```
 9. (Optional) Containerization with Docker:
 * Build the Docker image:
