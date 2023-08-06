@@ -1,4 +1,4 @@
-namespace Products.Contracts.Product;
+namespace Products.Contracts.Products;
 
 public record GetProductRequest(
     string Name,

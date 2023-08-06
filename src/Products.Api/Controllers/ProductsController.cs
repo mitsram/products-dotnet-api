@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Products.Application.Products.Commands.CreateProduct;
 using Products.Application.Products.Common;
-using Products.Contracts.Product;
+using Products.Contracts.Products;
 
 namespace Products.Api.Controllers;
 

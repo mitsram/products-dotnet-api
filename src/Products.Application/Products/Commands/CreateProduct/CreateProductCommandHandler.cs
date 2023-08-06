@@ -1,4 +1,3 @@
-
 using ErrorOr;
 using MediatR;
 using Products.Application.Common.Interfaces.Persistence;
@@ -20,6 +19,8 @@ public class CreateProductCommandHandler :
 
     public async Task<ErrorOr<ProductResult>> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
+        await Task.CompletedTask;
+        
         // 1. Validate product doesn't exists
         if (_productRepository.GetProductByName(command.Name) is not null)
         {
