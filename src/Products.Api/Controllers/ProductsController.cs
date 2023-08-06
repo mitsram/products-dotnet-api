@@ -1,3 +1,4 @@
+using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
 using Products.Application.Services.Products;
 using Products.Contracts.Product;
@@ -6,7 +7,7 @@ namespace Products.Api.Controllers;
 
 [ApiController]
 // [Route("products")]
-public class ProductsController: ControllerBase
+public class ProductsController: ApiController
 {
     private readonly IProductService _productService;
 
@@ -18,19 +19,24 @@ public class ProductsController: ControllerBase
     [HttpPost("products")]
     public IActionResult CreateProduct(CreateProductRequest request)
     {
-        var result = _productService.CreateProduct(
+        ErrorOr<CreateProductResult> result = _productService.CreateProduct(
             request.Name,
             request.Description,
             request.Price
         );
-
-        var response = new CreateProductResponse(
-            result.Product.Id,
-            result.Product.Name,
-            result.Product.Description,
-            result.Product.Price
+        return result.Match(
+            result => Ok(MapProductResult(result)),
+            errors => Problem(errors)
         );
-        
-        return Ok(response);
+    }
+
+    private static CreateProductResponse MapProductResult(CreateProductResult result)
+    {
+        return new CreateProductResponse(
+                result.Product.Id,
+                result.Product.Name,
+                result.Product.Description,
+                result.Product.Price
+        );
     }
 }
