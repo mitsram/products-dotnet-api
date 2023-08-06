@@ -1,6 +1,9 @@
 using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
 using Products.Application.Services.Products;
+using Products.Application.Services.Products.Commands;
+using Products.Application.Services.Products.Common;
+using Products.Application.Services.Products.Queries;
 using Products.Contracts.Product;
 
 namespace Products.Api.Controllers;
@@ -9,17 +12,19 @@ namespace Products.Api.Controllers;
 // [Route("products")]
 public class ProductsController: ApiController
 {
-    private readonly IProductService _productService;
+    private readonly IProductCommandService _productCommandService;
+    private readonly IProductQueryService _productQueryService;
 
-    public ProductsController(IProductService productService)
+    public ProductsController(IProductCommandService productCommandService, IProductQueryService productQueryService)
     {
-        _productService = productService;
+        _productCommandService = productCommandService;
+        _productQueryService = productQueryService;
     }
 
     [HttpPost("products")]
     public IActionResult CreateProduct(CreateProductRequest request)
     {
-        ErrorOr<CreateProductResult> result = _productService.CreateProduct(
+        ErrorOr<ProductResult> result = _productCommandService.CreateProduct(
             request.Name,
             request.Description,
             request.Price
@@ -30,7 +35,7 @@ public class ProductsController: ApiController
         );
     }
 
-    private static CreateProductResponse MapProductResult(CreateProductResult result)
+    private static CreateProductResponse MapProductResult(ProductResult result)
     {
         return new CreateProductResponse(
                 result.Product.Id,

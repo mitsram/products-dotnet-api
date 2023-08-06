@@ -1,5 +1,6 @@
 using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
+using Products.Api.Common.Http;
 
 namespace Products.Api.Controllers;
 
@@ -7,6 +8,8 @@ public class ApiController : ControllerBase
 {
     protected IActionResult Problem(List<Error> errors)
     {
+        HttpContext.Items[HttpContextItemKeys.Errors] = errors;
+        
         var firstError = errors[0];
 
         var statusCode = firstError.Type switch

@@ -1,21 +1,22 @@
 using ErrorOr;
 using Products.Application.Common.Errors;
 using Products.Application.Common.Interfaces.Persistence;
+using Products.Application.Services.Products.Common;
 using Products.Domain.Common.Errors;
 using Products.Domain.Entities;
 
-namespace Products.Application.Services.Products;
+namespace Products.Application.Services.Products.Commands;
 
-public class ProductService : IProductService
+public class ProductCommandService : IProductCommandService
 {
     private readonly IProductRepository _productRepository;
 
-    public ProductService(IProductRepository productRepository)
+    public ProductCommandService(IProductRepository productRepository)
     {
         _productRepository = productRepository;
     }
 
-    public ErrorOr<CreateProductResult> CreateProduct(string name, string description, decimal price)
+    public ErrorOr<ProductResult> CreateProduct(string name, string description, decimal price)
     {
         // 1. Validate product doesn't exists
         if (_productRepository.GetProductByName(name) is not null)
@@ -34,6 +35,6 @@ public class ProductService : IProductService
         };
         _productRepository.AddProduct(product);
 
-        return new CreateProductResult(product);
+        return new ProductResult(product);
     }
 }
