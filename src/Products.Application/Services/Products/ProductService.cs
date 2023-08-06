@@ -1,3 +1,4 @@
+using Products.Application.Common.Errors;
 using Products.Application.Common.Interfaces.Persistence;
 using Products.Domain.Entities;
 
@@ -17,7 +18,8 @@ public class ProductService : IProductService
         // 1. Validate product doesn't exists
         if (_productRepository.GetProductByName(name) is not null)
         {
-            throw new Exception("Product already exists");
+            // throw new Exception("Product already exists");
+            throw new DuplicateNameException();
         }
 
         // 2. Create product (generated unique Id) and persist to DB
