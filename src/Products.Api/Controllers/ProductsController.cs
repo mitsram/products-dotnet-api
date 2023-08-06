@@ -1,9 +1,10 @@
+
+
 using ErrorOr;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Products.Application.Services.Products;
-using Products.Application.Services.Products.Commands;
-using Products.Application.Services.Products.Common;
-using Products.Application.Services.Products.Queries;
+using Products.Application.Products.Commands.CreateProduct;
+using Products.Application.Products.Common;
 using Products.Contracts.Product;
 
 namespace Products.Api.Controllers;
@@ -12,23 +13,19 @@ namespace Products.Api.Controllers;
 // [Route("products")]
 public class ProductsController: ApiController
 {
-    private readonly IProductCommandService _productCommandService;
-    private readonly IProductQueryService _productQueryService;
+    private readonly ISender _mediator;
 
-    public ProductsController(IProductCommandService productCommandService, IProductQueryService productQueryService)
+    public ProductsController(ISender mediator)
     {
-        _productCommandService = productCommandService;
-        _productQueryService = productQueryService;
+        _mediator = mediator;
     }
 
     [HttpPost("products")]
-    public IActionResult CreateProduct(CreateProductRequest request)
+    public async Task<IActionResult> CreateProduct(CreateProductRequest request)
     {
-        ErrorOr<ProductResult> result = _productCommandService.CreateProduct(
-            request.Name,
-            request.Description,
-            request.Price
-        );
+        var command = new CreateProductCommand(request.Name, request.Description, request.Price);
+        ErrorOr<ProductResult> result = await _mediator.Send(command);
+        
         return result.Match(
             result => Ok(MapProductResult(result)),
             errors => Problem(errors)
