@@ -4,6 +4,7 @@ using Products.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services
+        .AddPresentation()
         .AddApplication()
         .AddInfrastructure();
     builder.Services.AddControllers();

@@ -1,6 +1,7 @@
 
 
 using ErrorOr;
+using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Products.Application.Products.Commands.CreateProduct;
@@ -10,35 +11,26 @@ using Products.Contracts.Products;
 namespace Products.Api.Controllers;
 
 [ApiController]
-// [Route("products")]
 public class ProductsController: ApiController
 {
     private readonly ISender _mediator;
+    private readonly IMapper _mapper;
 
-    public ProductsController(ISender mediator)
+    public ProductsController(ISender mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpPost("products")]
     public async Task<IActionResult> CreateProduct(CreateProductRequest request)
     {
-        var command = new CreateProductCommand(request.Name, request.Description, request.Price);
+        var command = _mapper.Map<CreateProductCommand>(request);
         ErrorOr<ProductResult> result = await _mediator.Send(command);
         
         return result.Match(
-            result => Ok(MapProductResult(result)),
+            result => Ok(_mapper.Map<CreateProductResponse>(result)),
             errors => Problem(errors)
-        );
-    }
-
-    private static CreateProductResponse MapProductResult(ProductResult result)
-    {
-        return new CreateProductResponse(
-                result.Product.Id,
-                result.Product.Name,
-                result.Product.Description,
-                result.Product.Price
         );
     }
 }
