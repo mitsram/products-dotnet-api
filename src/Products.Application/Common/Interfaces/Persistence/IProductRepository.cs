@@ -1,9 +1,8 @@
-using Products.Domain.Entities;
+using Products.Domain.Product;
 
 namespace Products.Application.Common.Interfaces.Persistence;
 
 public interface IProductRepository
 {
-    void AddProduct(Product product);
-    Product? GetProductByName(string name);
+    void Add(Product product);
 }

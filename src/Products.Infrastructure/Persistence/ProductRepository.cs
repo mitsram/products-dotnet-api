@@ -1,19 +1,13 @@
 using Products.Application.Common.Interfaces.Persistence;
-using Products.Domain.Entities;
+using Products.Domain.Product;
 
 namespace Products.Infrastructure.Persistence;
 
 public class ProductRepository : IProductRepository
 {
-    private static readonly List<Product> _products = new();
-
-    public void AddProduct(Product product)
+    private readonly List<Product> _products = new();
+    public void Add(Product product)
     {
         _products.Add(product);
-    }
-
-    public Product? GetProductByName(string name)
-    {
-        return _products.SingleOrDefault(p => p.Name == name);
     }
 }

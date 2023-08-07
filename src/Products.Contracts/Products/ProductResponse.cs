@@ -1,7 +1,7 @@
 namespace Products.Contracts.Products;
 
-public record CreateProductResponse(
-    Guid Id,
+public record ProductResponse(
+    string Id,
     string Name,
     string Description,
     decimal Price

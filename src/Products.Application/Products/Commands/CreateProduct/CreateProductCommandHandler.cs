@@ -1,14 +1,12 @@
 using ErrorOr;
 using MediatR;
 using Products.Application.Common.Interfaces.Persistence;
-using Products.Domain.Entities;
-using Products.Application.Products.Common;
-using Products.Domain.Common.Errors;
+using Products.Domain.Product;
 
 namespace Products.Application.Products.Commands.CreateProduct;
 
 public class CreateProductCommandHandler :
-    IRequestHandler<CreateProductCommand, ErrorOr<ProductResult>>
+    IRequestHandler<CreateProductCommand, ErrorOr<Product>>
 {
     private readonly IProductRepository _productRepository;
 
@@ -17,25 +15,20 @@ public class CreateProductCommandHandler :
         _productRepository = productRepository;
     }
 
-    public async Task<ErrorOr<ProductResult>> Handle(CreateProductCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<Product>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
         
-        // 1. Validate product doesn't exists
-        if (_productRepository.GetProductByName(command.Name) is not null)
-        {
-            return Errors.Product.DuplicateName;
-        }
+        // Create Product
+        var product = Product.Create(
+            request.Name,
+            request.Description,
+            request.Price
+        );
+        // Persist Product
+        _productRepository.Add(product);
 
-        // 2. Create product (generated unique Id) and persist to DB
-        var product = new Product
-        {
-            Name = command.Name,
-            Description = command.Description,
-            Price = command.Price
-        };
-        _productRepository.AddProduct(product);
-
-        return new ProductResult(product);
+        // Return Product
+        return product;
     }
 }
