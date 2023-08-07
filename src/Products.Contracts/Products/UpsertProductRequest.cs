@@ -1,6 +1,6 @@
 namespace Products.Contracts.Products;
 
-public record GetProductRequest(
+public record UpsertProductRequest(
     string Name,
     string Description,
     decimal Price    

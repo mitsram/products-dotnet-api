@@ -4,7 +4,7 @@ POST {{host}}/products
 Content-Type: application/json
 
 {
-    "name": "Mouse",
-    "description": "MX Master 3",
+    "name": "test",
+    "description": "test",
     "price": 189.50
 }
