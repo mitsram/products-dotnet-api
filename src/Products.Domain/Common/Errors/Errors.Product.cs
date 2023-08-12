@@ -1,5 +1,4 @@
 using ErrorOr;
-using Products.Domain.Product;
 
 namespace Products.Domain.Common.Errors;
 

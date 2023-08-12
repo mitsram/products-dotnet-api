@@ -4,5 +4,9 @@ public record ProductResponse(
     string Id,
     string Name,
     string Description,
-    decimal Price
+    Price Price
 );
+
+public record Price(
+    decimal Amount,
+    string Currency);
