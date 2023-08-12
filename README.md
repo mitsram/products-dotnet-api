@@ -1,4 +1,4 @@
-https://github.com/mitsram/products-dotnet-api/actions/workflows/ci/badge.svg
+(https://github.com/mitsram/products-dotnet-api/actions/workflows/ci/badge.svg)
 
 # products-dotnet-api
 
