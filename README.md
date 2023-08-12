@@ -1,4 +1,5 @@
-(https://github.com/mitsram/products-dotnet-api/actions/workflows/ci/badge.svg)
+[![Build Status](https://img.shields.io/github/workflow/status/mitsram/products-dotnet-api/ci.yml](https://github.com/mitsram/products-dotnet-api/ci)
+
 
 # products-dotnet-api
 
