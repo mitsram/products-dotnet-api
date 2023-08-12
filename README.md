@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/github/workflow/status/mitsram/products-dotnet-api/CICD)](https://github.com/yourusername/yourrepo/actions)
+[![Build Status](https://img.shields.io/github/workflow/status/mitsram/products-dotnet-api/CICD)](https://github.com/mitsram/products-dotnet-api/ci.yml)
 
 
 
