@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/github/workflow/status/mitsram/products-dotnet-api/ci.yml](https://github.com/mitsram/products-dotnet-api/ci)
+[![Build Status](https://img.shields.io/github/workflow/status/mitsram/products-dotnet-api/ci.yml](https://github.com/mitsram/products-dotnet-api/ci.yml)
 
 
 # products-dotnet-api
