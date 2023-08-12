@@ -1,3 +1,5 @@
+https://github.com/mitsram/products-dotnet-api/actions/workflows/ci/badge.svg
+
 # products-dotnet-api
 
 This project follows the Clean Architecture principles and is built with .NET Core.
