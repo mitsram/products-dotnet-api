@@ -16,6 +16,26 @@
     <PackageReference Include="ErrorOr" Version="1.2.1" />
     <PackageReference Include="Mapster" Version="7.3.0" />
     <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.3.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.3.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="openapi" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591, 1848</NoWarn>
+  </PropertyGroup>
+
+  <Target Name="BuildOpenApi" AfterTargets="Build">
+    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+      <Output TaskParameter="Assemblies" ItemName="MyAssemblyIdentities" />
+    </GetAssemblyIdentity>
+    <Exec Command="dotnet tool restore" />
+    <Exec Command="dotnet swagger tofile --output openapi/api.yaml --yaml $(TargetPath) v1" />
+  </Target>
 
 </Project>
