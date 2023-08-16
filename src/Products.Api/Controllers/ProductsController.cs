@@ -5,6 +5,7 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Products.Application.Products.Commands.CreateProduct;
+using Products.Application.Products.Queries;
 using Products.Contracts.Products;
 
 namespace Products.Api.Controllers;
@@ -30,6 +31,18 @@ public class ProductsController: ApiController
 
         return createProductResult.Match(
             product => Ok(_mapper.Map<ProductResponse>(product)),
+            errors => Problem(errors));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ListProducts()
+    {
+        var query = new ListProductsQuery();
+
+        var listDinnersQuery = await _mediator.Send(query);
+
+        return listDinnersQuery.Match(
+            dinners => Ok(dinners.Select(dinner => _mapper.Map<ProductResponse>(dinner))),
             errors => Problem(errors));
     }
 }

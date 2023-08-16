@@ -1,19 +1,21 @@
+using BuberDinner.Domain.DinnerAggregate.ValueObjects;
 using Products.Domain.Common.Models;
-using Products.Domain.Product.ValueObjects;
+using Products.Domain.ProductAggregate.Events;
+using Products.Domain.ProductAggregate.ValueObjects;
 
-namespace Products.Domain.Product;
+namespace Products.Domain.ProductAggregate;
 
-public sealed class Product : AggregateRoot<ProductId>
+public sealed class Product : AggregateRoot<ProductId, Guid>
 {
     public string Name { get; }
     public string Description { get; }
-    public decimal Price { get; }
+    public Price Price { get; }
 
     private Product(
         ProductId productId,
         string name,
         string description,
-        decimal price) : base(productId)
+        Price price) : base(productId)
     {
         Name = name;
         Description = description;
@@ -23,13 +25,17 @@ public sealed class Product : AggregateRoot<ProductId>
     public static Product Create(
         string name,
         string description,
-        decimal price)
+        Price price)
     {
-        return new(
+        var product = new Product(
             ProductId.CreateUnique(),
             name,
             description,
             price
         );
+
+        product.AddDomainEvent(new ProductCreated(product));
+
+        return product;
     }
 }

@@ -1,7 +1,8 @@
+using BuberDinner.Domain.DinnerAggregate.ValueObjects;
 using ErrorOr;
 using MediatR;
 using Products.Application.Common.Interfaces.Persistence;
-using Products.Domain.Product;
+using Products.Domain.ProductAggregate;
 
 namespace Products.Application.Products.Commands.CreateProduct;
 
@@ -15,20 +16,19 @@ public class CreateProductCommandHandler :
         _productRepository = productRepository;
     }
 
-    public async Task<ErrorOr<Product>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<Product>> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
-        await Task.CompletedTask;
-        
-        // Create Product
         var product = Product.Create(
-            request.Name,
-            request.Description,
-            request.Price
+            command.Name,
+            command.Description,
+            Price.Create(
+                command.Price.Amount,
+                command.Price.Currency
+            )
         );
-        // Persist Product
-        _productRepository.Add(product);
 
-        // Return Product
+        await _productRepository.AddAsync(product);
+
         return product;
     }
 }

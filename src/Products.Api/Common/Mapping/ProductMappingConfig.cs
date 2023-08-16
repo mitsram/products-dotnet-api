@@ -2,7 +2,7 @@
 using Mapster;
 using Products.Application.Products.Commands.CreateProduct;
 using Products.Contracts.Products;
-using Products.Domain.Product;
+using Products.Domain.ProductAggregate;
 
 namespace Products.Api.Common.Mapping;
 

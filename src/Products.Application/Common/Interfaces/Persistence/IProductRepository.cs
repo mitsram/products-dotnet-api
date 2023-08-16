@@ -1,8 +1,11 @@
-using Products.Domain.Product;
+
+
+using Products.Domain.ProductAggregate;
 
 namespace Products.Application.Common.Interfaces.Persistence;
 
 public interface IProductRepository
 {
-    void Add(Product product);
+    Task AddAsync(Product dinner);
+    Task<List<Product>> ListAsync();
 }
