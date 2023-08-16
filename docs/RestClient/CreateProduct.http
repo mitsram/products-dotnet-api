@@ -6,5 +6,8 @@ Content-Type: application/json
 {
     "name": "test",
     "description": "test",
-    "price": 189.50
+    "price": {
+        "amount": 18.00,
+        "currency": "AUD"
+    },
 }

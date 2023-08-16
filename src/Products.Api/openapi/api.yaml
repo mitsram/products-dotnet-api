@@ -21,6 +21,12 @@ paths:
       responses:
         '200':
           description: Success
+    get:
+      tags:
+        - Products
+      responses:
+        '200':
+          description: Success
 components:
   schemas:
     CreateProductRequest:
@@ -33,6 +39,15 @@ components:
           type: string
           nullable: true
         price:
+          $ref: '#/components/schemas/ProductPrice'
+      additionalProperties: false
+    ProductPrice:
+      type: object
+      properties:
+        amount:
           type: number
           format: double
+        currency:
+          type: string
+          nullable: true
       additionalProperties: false

@@ -35,9 +35,9 @@ public class ProductsController: ApiController
     }
 
     [HttpGet]
-    public async Task<IActionResult> ListProducts(string hostId)
+    public async Task<IActionResult> ListProducts()
     {
-        var query = _mapper.Map<ListProductsQuery>(hostId);
+        var query = new ListProductsQuery();
 
         var listDinnersQuery = await _mediator.Send(query);
 

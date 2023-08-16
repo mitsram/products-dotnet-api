@@ -3,5 +3,9 @@ namespace Products.Contracts.Products;
 public record CreateProductRequest(
     string Name,
     string Description,
-    decimal Price    
+    ProductPrice Price    
 );
+
+public record ProductPrice(
+    decimal Amount,
+    string Currency);

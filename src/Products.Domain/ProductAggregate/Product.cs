@@ -1,5 +1,6 @@
 using BuberDinner.Domain.DinnerAggregate.ValueObjects;
 using Products.Domain.Common.Models;
+using Products.Domain.ProductAggregate.Events;
 using Products.Domain.ProductAggregate.ValueObjects;
 
 namespace Products.Domain.ProductAggregate;
@@ -32,6 +33,8 @@ public sealed class Product : AggregateRoot<ProductId, Guid>
             description,
             price
         );
+
+        product.AddDomainEvent(new ProductCreated(product));
 
         return product;
     }
