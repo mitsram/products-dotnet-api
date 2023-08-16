@@ -9,7 +9,7 @@ using Products.Contracts.Products;
 
 namespace Products.Api.Controllers;
 
-[ApiController]
+[Route("products")]
 public class ProductsController: ApiController
 {
     private readonly ISender _mediator;
@@ -21,7 +21,7 @@ public class ProductsController: ApiController
         _mapper = mapper;
     }
 
-    [HttpPost("products")]
+    [HttpPost]
     public async Task<IActionResult> CreateProduct(CreateProductRequest request)
     {
         var command = _mapper.Map<CreateProductCommand>(request);
