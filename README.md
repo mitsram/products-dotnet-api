@@ -1,3 +1,7 @@
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/mitsram/products-dotnet-api/.github%2Fworkflows%2Fci.yml)
+
+
+
 # products-dotnet-api
 
 This project follows the Clean Architecture principles and is built with .NET Core.

@@ -5,6 +5,7 @@ using Products.Api.Common.Http;
 
 namespace Products.Api.Controllers;
 
+[ApiController]
 public class ApiController : ControllerBase
 {
     protected IActionResult Problem(List<Error> errors)

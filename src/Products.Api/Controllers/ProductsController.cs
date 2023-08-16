@@ -10,7 +10,6 @@ using Products.Contracts.Products;
 
 namespace Products.Api.Controllers;
 
-[ApiController]
 [Route("products")]
 public class ProductsController: ApiController
 {
