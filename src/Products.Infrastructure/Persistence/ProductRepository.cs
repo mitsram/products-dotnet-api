@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Products.Application.Common.Interfaces.Persistence;
 using Products.Domain.ProductAggregate;
+using Products.Domain.ProductAggregate.ValueObjects;
 
 namespace Products.Infrastructure.Persistence;
 
@@ -18,6 +19,11 @@ public class ProductRepository : IProductRepository
         await _dbContext.AddAsync(product);
 
         await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task<bool> ExistsAsync(ProductId productId)
+    {
+        return await _dbContext.Products.AnyAsync(product => product.Id == productId);
     }
 
     public async Task<List<Product>> ListAsync()

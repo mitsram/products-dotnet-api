@@ -4,10 +4,10 @@ POST {{host}}/products
 Content-Type: application/json
 
 {
-    "name": "test",
-    "description": "test",
+    "name": "Laptop",
+    "description": "Macbook Pro",
     "price": {
-        "amount": 18.00,
+        "amount": 1888.00,
         "currency": "AUD"
-    },
+    }
 }

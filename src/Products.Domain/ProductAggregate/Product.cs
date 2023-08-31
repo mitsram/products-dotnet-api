@@ -38,4 +38,10 @@ public sealed class Product : AggregateRoot<ProductId, Guid>
 
         return product;
     }
+    
+    #pragma warning disable CS8618
+    private Product()
+    {
+    }
+    #pragma warning restore CS8618
 }
