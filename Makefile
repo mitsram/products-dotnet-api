@@ -1,8 +1,7 @@
 # Why are we using a Makefile? PactFlow has around 30 example consumer and provider projects that show how to use Pact.
 # We often use them for demos and workshops, and Makefiles allow us to provide a consistent language and platform agnostic interface
 # for each project. You do not need to use Makefiles to use Pact in your own project!
-PACT_BROKER_BASE_URL=https://mitsram.pactflow.io
-PACT_BROKER_TOKEN=t45QSNQfG24FuykZOseHzw
+
 PACTICIPANT := "products-dotnet-api"
 GITHUB_REPO := "products-dotnet-api"
 PACT_CLI_DOCKER_VERSION?=latest
